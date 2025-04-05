@@ -49,7 +49,7 @@ void enqueue()
         rear++;
         printf("\nEnter the value to be entered in the queue : ");
         scanf("%d", &value);
-        queue[rear]=value;;
+        queue[rear]=value;
         printf("\n\n%d entered in the queue\n\n", value);
     }
 }
