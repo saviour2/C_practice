@@ -64,7 +64,7 @@ int insert(void)
                 scanf("%d", &num);
                 array[i] = num;
             }
-            printf("\n\n%d Elements successfuly entered\n", no_Elements);
+            printf("\n\n%d Elements successfully entered\n", no_Elements);
             return 0;
         }
     }
@@ -73,6 +73,12 @@ int insert(void)
 int delete(void)
 {
     int del_num, i, j, flag = 0;
+
+    if (no_Elements == 0)
+    {
+        printf("\n\nArray is empty. Nothing to delete.\n\n");
+        return 0;
+    }
 
     while (1)
     {
@@ -88,11 +94,13 @@ int delete(void)
         }
         if (flag == 1)
         {
-            for (j = i; j < no_Elements; j++)
+            for (j = i; j < no_Elements-1; j++)
             {
                 array[j] = array[j + 1];
             }
             no_Elements--;
+            printf("\n\nElement %d deleted successfully.\n\n", del_num);
+
         }
         else
             printf("\n\nElement not in the array\n\n");
@@ -102,9 +110,18 @@ int delete(void)
 
 void display()
 {
-    printf("\n\nElements : ");
+    if (no_Elements == 0)
+    {
+        printf("\n\nArray is empty.\n");
+        return;
+    }
+    else
+    {
+        printf("\n\nElements : ");
     for (int i = 0; i < no_Elements; i++)
     {
         printf("%d ", array[i]);
     }
+    }
+    
 }
