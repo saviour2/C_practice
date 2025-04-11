@@ -8,6 +8,7 @@ typedef struct Node
 } Node;
 
 Node *createNode(int);
+Node *insertAtBeginning(Node *,int);
 
 int main()
 {
@@ -47,4 +48,16 @@ Node *createNode(int value)
     newNode->next = NULL;
 
     return newNode;
+}
+
+Node *insertAtBeginning(Node *head,int value)
+{
+    Node *newNode = createNode(value);
+    if(newNode == NULL)
+        return head;
+
+    newNode -> next = head;
+    head = newNode;
+
+    return head;
 }
