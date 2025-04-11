@@ -1,42 +1,50 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Node
+typedef struct Node
 {
     int data;
     struct Node *next;
-};
+} Node;
 
-// Function to create a new node with a given value
-struct Node *createNode(int value)
+Node *createNode(int);
+
+int main()
 {
-    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    int value;
+    printf("Enter value to create a node: ");
+    scanf("%d", &value);
 
+    Node *head = createNode(value);
+
+    if (head != NULL)
+    {
+        printf("Node created successfully!\n");
+        printf("Data: %d\n", head->data);
+        printf("Next: %p\n", (void *)head->next);
+    }
+    else
+    {
+        printf("Failed to create node.\n");
+    }
+
+    // Always free memory when you're done
+    free(head);
+
+    return 0;
+}
+
+Node *createNode(int value)
+{
+    Node *newNode = (Node *)malloc(sizeof(Node));
     if (newNode == NULL)
     {
-        printf("\n\nFAILED TO CREATE NODE");
-        return NULL;
+        printf("\n\n[ !!! Memory Allocation Failed !!! ]\n");
+        return NULL; 
     }
 
     newNode->data = value;
     newNode->next = NULL;
 
     return newNode;
-}
-
-int main()
-{
-    int val;
-    printf("\nEnter an Integer : ");
-    scanf("%d", &val);
-
-    // Get the created node from the function
-    struct Node *head = createNode(val);
-
-    if (head != NULL)
-        printf("\n\nThe linked list : %d\n", head->data);
-    else
-        printf("\n\nLinked list is empty.\n");
-
-    return 0;
 }
