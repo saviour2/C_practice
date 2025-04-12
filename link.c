@@ -5,59 +5,52 @@ typedef struct Node
 {
     int data;
     struct Node *next;
-} Node;
+}Node;
 
-Node *createNode(int);
-Node *insertAtBeginning(Node *,int);
-
-int main()
+Node *createNode( int value )
 {
-    int value;
-    printf("Enter value to create a node: ");
-    scanf("%d", &value);
-
-    Node *head = createNode(value);
-
-    if (head != NULL)
-    {
-        printf("Node created successfully!\n");
-        printf("Data: %d\n", head->data);
-        printf("Next: %p\n", (void *)head->next);
-    }
-    else
-    {
-        printf("Failed to create node.\n");
-    }
-
-    // Always free memory when you're done
-    free(head);
-
-    return 0;
-}
-
-Node *createNode(int value)
-{
-    Node *newNode = (Node *)malloc(sizeof(Node));
-    if (newNode == NULL)
-    {
-        printf("\n\n[ !!! Memory Allocation Failed !!! ]\n");
-        return NULL; 
-    }
-
-    newNode->data = value;
-    newNode->next = NULL;
+    Node *newNode = (Node*)malloc(sizeof(Node));
+    if(newNode == NULL)
+        {
+            printf("\n\nMemory Allocation Failed... terminating");
+            return NULL;
+        }
+    
+    newNode -> data = value;
+    newNode -> next = NULL;
 
     return newNode;
 }
 
-Node *insertAtBeginning(Node *head,int value)
+Node *insertAtBeginning(Node *head, int value)
 {
     Node *newNode = createNode(value);
     if(newNode == NULL)
-        return head;
+        {
+            return head;
+        }
 
     newNode -> next = head;
     head = newNode;
+
+    return head;
+}
+
+Node *insertAtEnd( Node *head, int value)
+{
+    Node *newNode = createNode(value);
+    
+    if( newNode == NULL )
+        return head;
+
+    if( head == NULL )
+        return newNode;
+
+    Node *temp = head;
+    while( temp -> next != NULL)
+        temp = temp -> next;
+
+    temp -> next = newNode;
 
     return head;
 }
