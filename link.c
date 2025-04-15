@@ -5,7 +5,7 @@ typedef struct Node
 {
     int data;
     struct Node *next;
-}Node;
+}Node; //Node can be used instead of struct Node
 
 Node *createNode( int value )
 {
@@ -20,7 +20,7 @@ Node *createNode( int value )
     newNode -> next = NULL;
 
     return newNode;
-}
+} //Creates a fresh Node, not connected to any entity
 
 Node *insertAtBeginning(Node *head, int value)
 {
@@ -34,7 +34,7 @@ Node *insertAtBeginning(Node *head, int value)
     head = newNode;
 
     return head;
-}
+} //Inserts the created node to the beginning and repositions head to point to it (newNode)
 
 Node *insertAtEnd( Node *head, int value)
 {
@@ -52,5 +52,38 @@ Node *insertAtEnd( Node *head, int value)
 
     temp -> next = newNode;
 
+    return head; 
+} //Inserts the created node to the end of the list after traversing the entire thing
+
+void display(Node *head)
+{
+    Node *tempHead = head;
+    if (tempHead == NULL)
+    {
+        printf("\n\nEmpty list, nothing to display...\n\n");
+        return;
+    }
+
+    printf("\n\nLIST ITEMS : ");
+    while (tempHead != NULL)
+    {
+        printf(" %d", tempHead->data);
+        tempHead = tempHead->next;
+    }
+} //Displays the list elements by traversing it 
+
+Node *deleteAtBeginning( Node * head)
+{
+    if (head == NULL)
+    {
+        printf("\n\nList is empty, nothing to delete");
+        return NULL;
+    }
+
+    Node *tempHead = head;
+    head = head -> next;
+    free(tempHead);
+
     return head;
-}
+    
+} // deletes the first element of the list
